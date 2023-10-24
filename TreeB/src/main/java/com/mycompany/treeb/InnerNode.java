@@ -68,7 +68,7 @@ public class InnerNode extends NTreeNode {
                 m = this.size-1;
             }
             
-            //System.out.println("El m es: " + m);
+            System.out.println("El m es aqui: " + m);
             leaf = (LeafNode) this.children[m];
             
             NTreeNode n = leaf.add(data);
@@ -134,6 +134,8 @@ public class InnerNode extends NTreeNode {
 
             for(int i=0; i<b2; i++){
                 pRight.children[i] = this.children[i+n2];
+                pRight.children[i].parent = pRight;
+                //System.out.println("Ch: " + pRight.children[i].stringTo());
             } // copia los hijos de la derecha al nodo pRight
 
             pRight.size = b2;
@@ -183,6 +185,8 @@ public class InnerNode extends NTreeNode {
                 }else{ a = m+1; } //CORRECTITUD DE ESTO?
                 m = (a+b)/2;
             } 
+            
+            System.out.println("El m en el split: " + m);
 
             // Correr datos desde posicion (b)
             int now = b;
@@ -197,7 +201,7 @@ public class InnerNode extends NTreeNode {
             this.children[this.size] = aux;
             // agregar dat en posicion ...
             this.children[b] = right;
-
+            right.parent = this;
             //this.range = this.children[this.size].updateRange(); //el rango es el de mas a la drecha
             this.size++;
             return this;
